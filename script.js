@@ -7,14 +7,14 @@ function addLog(message) {
     log.scrollTop = log.scrollHeight;
 }
 
-// Simulação de download 2
-document.getElementById('download2').addEventListener('click', () => {
-    addLog('Iniciando Download 2...');
-    setTimeout(() => addLog('Download 2 concluído!'), 2000);
-});
-
 // Log para Download 1
 document.getElementById('download1').addEventListener('click', () => {
     addLog('Preparando CleanPC BORGES.bat para download...');
+    setTimeout(() => addLog('Download concluído!'), 2000);
+});
+
+// Log para Download 2
+document.getElementById('download2').addEventListener('click', () => {
+    addLog('Preparando BORGESPC.bat para download...');
     setTimeout(() => addLog('Download concluído!'), 2000);
 });
