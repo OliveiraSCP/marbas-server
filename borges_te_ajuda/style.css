@@ -1,0 +1,126 @@
+:root{
+  --bg:#000;
+  --panel:#080808;
+  --card: rgba(255,255,255,0.02);
+  --neon:#ffffff;
+  --accent:#39f7ff; /* cyan neon */
+  --muted: #9aa0a6;
+  --toast-bg: rgba(255,255,255,0.04);
+}
+
+/* RESET */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background: var(--bg);
+  color: #fff;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* SPLASH */
+.splash{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  z-index:9999;
+}
+.splash-center{display:flex;flex-direction:column;align-items:center;gap:18px;padding:30px;border-radius:16px}
+.finger{width:120px;height:160px;cursor:pointer;filter:drop-shadow(0 0 18px rgba(57,247,255,0.04));transition:transform .18s}
+.finger:active{transform:scale(.98)}
+.finger g{transform-origin:60px 60px;animation:fp-wave 2.6s infinite}
+@keyframes fp-wave{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+.splash-title{font-size:22px;display:flex;gap:10px;align-items:center}
+.neon{color:var(--neon);text-shadow:0 0 10px rgba(255,255,255,0.9);font-weight:800;animation:neon-flicker 3s infinite}
+.plain{color:var(--muted);font-weight:600}
+.splash-sub{color:var(--muted);font-size:13px}
+@keyframes neon-flicker{0%,100%{opacity:1}40%{opacity:.85}60%{opacity:.9}}
+
+/* APP LAYOUT */
+.hidden{display:none}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;padding:14px 20px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));
+  backdrop-filter: blur(6px);
+  position:sticky;top:0;z-index:50;
+}
+.brand{font-weight:800;letter-spacing:.6px}
+.menu{display:flex;gap:12px;align-items:center}
+.hamburger{display:none;background:transparent;border:none;color:var(--muted);font-size:20px}
+
+/* MENU BUTTONS */
+.menu-item{
+  background:transparent;border:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-weight:700;cursor:pointer;
+}
+.menu-item.active,.menu-item:hover{
+  color:var(--accent);
+  box-shadow: inset 0 -2px 0 var(--accent);
+  transform:translateY(-2px);
+}
+
+/* MAIN CONTENT */
+.main{max-width:1100px;margin:0 auto;padding:24px}
+.panel{background:var(--panel);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+.hero-title{font-size:20px;margin-bottom:6px;opacity:0;transform:translateY(8px);animation:fadeInUp .8s forwards .1s}
+.hero-sub{color:var(--muted);opacity:0;transform:translateY(8px);animation:fadeInUp .8s forwards .25s}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+
+/* HOME CARDS */
+.home-cards{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.home-card{flex:1 1 240px;background:var(--card);padding:14px;border-radius:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.h-icon{font-size:22px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--neon)}
+
+/* BUTTONS & GRIDS */
+.grid, .opt-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800;transition:all .15s}
+.btn:hover{color:var(--accent);transform:translateY(-3px);border-color:rgba(57,247,255,0.12)}
+.btn.neon{background:var(--neon);color:#000;box-shadow:0 10px 40px rgba(57,247,255,0.04)}
+.opt-grid .btn{min-width:140px}
+
+/* SUB MENU */
+.sub-menu{margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+.grid .btn{min-width:110px}
+
+/* FLOATING DOWNLOAD HUD */
+.floating-download{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:320px;
+  max-width:calc(100% - 36px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.04);
+  z-index:999999;
+  transform: translateY(20px);
+  opacity:0;
+  animation: floatIn .36s ease forwards;
+}
+@keyframes floatIn{to{transform:translateY(0);opacity:1}}
+
+.f-d-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.f-name{font-weight:800}
+.f-size{color:var(--muted);font-size:13px}
+
+.f-bar-outer{height:10px;background:rgba(255,255,255,0.03);border-radius:8px;overflow:hidden;margin:8px 0}
+.f-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),rgba(57,247,255,0.5));transition:width .12s linear}
+
+.f-meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin-top:8px}
+.f-close{background:transparent;border:none;color:var(--muted);cursor:pointer;font-weight:800}
+
+/* TOAST */
+.bt-toast{position:fixed;right:14px;bottom:14px;background:var(--toast-bg);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;z-index:99999}
+
+/* FOOTER */
+.footer{text-align:center;padding:18px;color:rgba(255,255,255,0.5)}
+
+/* RESPONSIVE */
+@media (max-width:520px){
+  .floating-download{left:12px;right:12px;bottom:12px;width:auto}
+  .home-cards{flex-direction:column}
+  .opt-grid{flex-direction:column}
+  .grid{flex-direction:column}
+}
