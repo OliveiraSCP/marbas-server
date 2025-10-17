@@ -1,0 +1,142 @@
+/* STYLE.CSS — atualizado (removeu texto pedido, adicionou toast de download) */
+
+/* Reset e base */
+:root{
+  --bg:#071017;
+  --accent:#35f08a;
+  --muted:#9fbf9d;
+  --radius:14px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(53,240,138,0.04), transparent 8%),
+    radial-gradient(900px 400px at 90% 90%, rgba(142,240,209,0.02), transparent 5%),
+    var(--bg);
+  color: #d7efd8;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Layout container */
+.wrap{ width:100%; max-width:1100px; margin:20px; display:flex; flex-direction:column; gap:18px; }
+
+/* Topbar */
+.topbar{ display:flex; align-items:center; gap:16px; justify-content:space-between; }
+.brand{ width:64px;height:64px;border-radius:12px; display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:26px; background: linear-gradient(135deg, rgba(20,30,20,0.6), rgba(5,15,10,0.35));
+  color:var(--accent); border:1px solid rgba(80,240,140,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 -6px 20px rgba(0,0,0,0.2);
+}
+.site-title{ font-size:20px; letter-spacing:1px; color:#eafde7; margin-bottom:4px; }
+.site-title .dot{ color: var(--muted); font-weight:600; font-size:15px; margin-left:6px; }
+
+/* chips */
+.meta{ display:flex; gap:8px; align-items:center; }
+.chip{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02); padding:6px 10px; border-radius:999px; font-size:13px; color:var(--muted); }
+
+/* Card / terminal */
+.card.terminal{ position:relative; overflow:hidden; border-radius:var(--radius); padding:0;
+  background: linear-gradient(180deg, rgba(2,6,6,0.6), rgba(2,4,4,0.25));
+  border:1px solid rgba(120,255,160,0.04); box-shadow: 0 18px 60px rgba(2,6,6,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* header */
+.terminal-header{ display:flex; align-items:center; gap:12px; padding:14px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.02); background: linear-gradient(180deg, rgba(0,0,0,0.15), transparent); }
+.lights{ display:flex; gap:8px; }
+.lights i{ width:12px;height:12px;border-radius:99px; display:inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+.lights i:nth-child(1){ background: linear-gradient(#ff7a7a,#ff4a4a); }
+.lights i:nth-child(2){ background: linear-gradient(#ffd47a,#ffb84a); }
+.lights i:nth-child(3){ background: linear-gradient(#8ff09a,#3fe070); }
+.term-title{ font-family: var(--mono); font-size:13px; color:var(--muted); }
+
+/* body */
+.terminal-body{ padding:18px; }
+.code{ font-family: var(--mono); font-size:14px; line-height:1.6; color: #cfffe0; white-space:pre-wrap;
+  border-radius:10px; display:block; padding:6px 4px; outline:none; }
+
+/* footer with actions */
+.terminal-footer{ display:flex; gap:14px; align-items:center; justify-content:space-between;
+  padding:16px 18px; border-top:1px dashed rgba(120,255,140,0.02);
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent); position:relative; }
+
+/* botão */
+.btn{ display:inline-flex; align-items:center; gap:12px; text-decoration:none; padding:12px 18px; border-radius:12px;
+  font-weight:700; letter-spacing:0.6px; transition: transform .12s ease, box-shadow .12s ease;
+  border:1px solid rgba(255,255,255,0.03); background: linear-gradient(180deg, rgba(3,20,10,0.85), rgba(2,10,8,0.6));
+  color:#e5ffef; box-shadow: 0 10px 30px rgba(3,10,6,0.6); }
+.btn:active{ transform: translateY(1px) }
+.btn:focus{ outline:3px solid rgba(50,220,150,0.12); outline-offset:3px; }
+
+/* download variant */
+.btn-download{ background-image: linear-gradient(90deg, rgba(32,200,120,0.08), rgba(120,255,170,0.03));
+  border:1px solid rgba(60,230,140,0.12); color:#f7fff7; padding-left:14px; }
+.btn .icon{ display:inline-grid; place-items:center; width:36px;height:36px;border-radius:8px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.03);
+  font-weight:800; }
+
+/* --- DOWNLOAD TOAST (pure CSS) --- */
+/* toast hidden by default */
+.download-toast{
+  position:absolute;
+  right:18px;
+  bottom:66px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(5,10,8,0.85));
+  border:1px solid rgba(80,240,140,0.08);
+  padding:10px 14px;
+  border-radius:10px;
+  color:#dfffe6;
+  font-size:13px;
+  opacity:0;
+  transform: translateY(12px) scale(0.98);
+  pointer-events:none;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), opacity .18s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+/* show toast briefly while button is active (user press) or when button has focus and user presses Enter */
+.btn-download:active + .download-toast,
+.btn-download:focus-visible + .download-toast{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+/* small pulse while visible to give feedback */
+.btn-download:active + .download-toast{
+  animation: toast-pulse .9s ease-out;
+}
+@keyframes toast-pulse{
+  0%{ transform: translateY(6px) scale(.97); opacity:.95 }
+  60%{ transform: translateY(0) scale(1); opacity:1 }
+  100%{ transform: translateY(-6px) scale(.99); opacity:.92 }
+}
+
+/* background effect */
+.bg-effect{ position:absolute; inset:0; pointer-events:none;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.12)),
+  repeating-linear-gradient(0deg, rgba(255,255,255,0.012), rgba(255,255,255,0.012) 1px, transparent 1px, transparent 8px);
+  mix-blend-mode: overlay; opacity:0.6; transform: rotate(-2deg) scale(1.02); }
+
+/* footer */
+.footer{ display:flex; justify-content:center; color:var(--muted); font-size:13px; padding:6px 0; }
+
+/* responsive */
+@media (max-width:880px){
+  .topbar{ gap:12px; align-items:flex-start; }
+  .brand{ width:52px; height:52px; font-size:20px; }
+  .site-title{ font-size:18px; }
+  .terminal-body{ padding:14px; }
+  .terminal-footer{ flex-direction:column; align-items:flex-start; gap:10px; }
+}
+@media (max-width:420px){
+  body{ padding:14px; }
+  .brand{ width:46px; height:46px; }
+  .btn-text{ font-size:14px; }
+}
