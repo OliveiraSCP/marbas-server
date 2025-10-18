@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>borges.com</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- LOGIN -->
+  <main id="loginScreen" class="screen screen--center">
+    <div class="card card--glass" role="region" aria-label="Login">
+      <div class="brand">
+        <div class="logo">Δ</div>
+        <div class="meta">
+          <h1>SHOW BORGES</h1>
+          <p class="muted">BORGES • Center Dowloands</p>
+        </div>
+      </div>
+
+      <h2 class="headline">Insira um nick</h2>
+
+      <div class="form">
+        <input id="nickInput" class="input" type="text" placeholder="Seu nick (max 20 chars)" maxlength="20" />
+        <div class="row">
+          <button id="enterBtn" class="btn btn--neon">Entrar</button>
+          <button id="guestBtn" class="btn btn--ghost">BORGES</button>
+        </div>
+      </div>
+
+      <p class="note">AVISO: Não abuse dos arquivos <code>podem/</code>. Gera banimento perm</p>
+    </div>
+  </main>
+
+  <!-- MAIN MENU -->
+  <main id="mainMenu" class="screen hidden">
+    <header class="topbar">
+      <div class="left">
+        <div class="mini-logo">Δ</div>
+        <div class="title">BORGES DOWNLOADS</div>
+      </div>
+      <div class="right" id="userTag">—</div>
+    </header>
+
+    <section class="grid">
+      <article class="tile tile--big">
+        <div class="tile-head">
+          <h3>External Valorant</h3>
+          <p class="muted">Arquivo: <strong>External-Valorant.exe</strong></p>
+        </div>
+        <div class="tile-actions">
+          <button id="openDemo" class="btn btn--neon btn--lg">Abrir</button>
+        </div>
+      </article>
+
+      <article class="tile">
+        <h4>Status</h4>
+        <div class="status">
+          <span class="dot dot--ok"></span>
+          Em Teste
+        </div>
+      </article>
+
+      <article class="tile">
+        <h4>Config</h4>
+        <p class="muted">Tema: Black AMOLED • Neon Verde</p>
+      </article>
+    </section>
+
+    <footer class="footer muted">Seja Bem - Vindo há Central de Dowloands</footer>
+  </main>
+
+  <!-- DEMO / DOWNLOAD MODAL -->
+  <div id="demoModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+    <div class="modal-card card--glass">
+      <h2 id="demoTitle">Baixar External Valorant</h2>
+      <p class="muted">AVISO: desative seu anti-vírus pra que o External funcione corretamente!</p>
+
+      <!-- confirmação obrigatória antes de ativar o download -->
+      <div style="margin:14px 0;display:flex;gap:10px;align-items:center;flex-direction:column">
+        <label style="color:var(--muted);font-size:0.95rem;max-width:460px;text-align:center">
+          <input id="confirmCheck" type="checkbox" />
+          &nbsp;<strong>Confirmo que tenho direitos para baixar/compartilhar este arquivo</strong>
+        </label>
+
+        <!-- link de download aponta pra pasta Cracks — mas fica inativo até confirmação -->
+        <a id="downloadLink" class="btn btn--neon disabled" aria-disabled="true" href="#" download>Baixar External-Valorant.exe</a>
+        <div style="font-size:0.86rem;color:var(--muted);max-width:460px;text-align:center">O link será ativado apenas após confirmar o checkbox acima.</div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="closeDemo" class="btn btn--ghost">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
